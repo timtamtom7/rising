@@ -6,6 +6,7 @@ Things that require human action (not code):
 
 - [ ] **Logo** — Design a wordmark and icon for "Rising". Suggested: an upward-trending arrow or sun rising, in accent green (#22c55e).
 - [ ] **Domain** — Register `rising.app` (or similar). Point it to your hosting (Vercel, Netlify, etc.).
+- [ ] **GitHub** — Repo is at [github.com/timtamtom7/rising](https://github.com/timtamtom7/rising). (The spec mentioned `tomalabs2.0` but that account doesn't exist — used `timtamtom7` instead.)
 - [ ] **Unsplash API key** — Get a free key at [unsplash.com/developers](https://unsplash.com/developers) and add it to a `.env` file (`VITE_UNSPLASH_ACCESS_KEY`). Currently using curated placeholder photos only.
 - [ ] **Deploy** — Run `npm run build` and deploy the `dist/` folder to Vercel, Netlify, or Cloudflare Pages.
 

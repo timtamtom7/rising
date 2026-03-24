@@ -1,16 +1,51 @@
-# React + Vite
+# Rising
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Watch your goal come into view.
 
-Currently, two official plugins are available:
+A savings goal tracker that makes saving feel like progress. Set a goal, attach a photo, and watch it gradually reveal itself as you save.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Photo reveal mechanic** — Attach a photo to your goal. It reveals as you get closer to 100%.
+- **Progress tracking** — Visual progress bar with milestone markers at 25%, 50%, 75%.
+- **Deposit history** — Log every deposit with optional notes.
+- **Multiple goals** — Track several goals at once, with filtering.
+- **Dark & light mode** — Full theme support.
+- **Data export** — Download all your data as JSON.
+- **localStorage** — All data stays on your device. No account required.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+React + Vite · CSS (design tokens, no Tailwind) · React Router · localStorage
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development
+
+```bash
+npm install
+npm run dev     # http://localhost:5173
+npm run build   # production build
+```
+
+## Deploy
+
+```bash
+npm run build
+# Deploy dist/ to Vercel, Netlify, or Cloudflare Pages
+```
+
+## Pages
+
+| Route | Description |
+|---|---|
+| `/` | Landing page with animated demo |
+| `/app` | Goals grid, total saved |
+| `/app/goals/new` | Create a new goal |
+| `/app/goals/:id` | Goal detail with photo reveal |
+| `/app/goals/:id/deposit` | Add a deposit |
+| `/app/goals/:id/edit` | Edit goal details |
+| `/app/history` | All deposits across all goals |
+| `/app/settings` | Currency, theme, export |
+
+## To-Do
+
+See [TO-DO.md](./TO-DO.md) for human tasks (logo, domain, Unsplash API key, etc.).
