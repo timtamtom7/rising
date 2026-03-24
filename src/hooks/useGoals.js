@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { loadData, saveData, createGoal, createDeposit, createProperty, createMilestone } from '../utils/storage';
+import { loadData, saveData, createGoal, createDeposit, createProperty, createMilestone, createAgent } from '../utils/storage';
 
 export function useGoals() {
   const [data, setData] = useState(() => loadData());
@@ -163,6 +163,27 @@ export function useGoals() {
     }));
   }, []);
 
+  // ── Agents ─────────────────────────────────────────────────
+  const addAgent = useCallback((agentData) => {
+    const agent = createAgent(agentData);
+    setData((prev) => ({ ...prev, agents: [agent, ...prev.agents] }));
+    return agent;
+  }, []);
+
+  const updateAgent = useCallback((id, updates) => {
+    setData((prev) => ({
+      ...prev,
+      agents: prev.agents.map((a) => (a.id === id ? { ...a, ...updates } : a)),
+    }));
+  }, []);
+
+  const deleteAgent = useCallback((id) => {
+    setData((prev) => ({
+      ...prev,
+      agents: prev.agents.filter((a) => a.id !== id),
+    }));
+  }, []);
+
   return {
     data,
     addGoal,
@@ -183,5 +204,8 @@ export function useGoals() {
     updateMilestone,
     toggleMilestone,
     dismissNotification,
+    addAgent,
+    updateAgent,
+    deleteAgent,
   };
 }

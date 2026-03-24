@@ -95,6 +95,34 @@ export function PropertyCard({ property, currency = 'USD', onDelete, onPriceDrop
         {property.notes && (
           <p className="property-card-notes">{property.notes}</p>
         )}
+
+        {/* Market trend indicator */}
+        {property.estimatedValue && (
+          <div className="property-card-trend">
+            {property.estimatedValue > property.price ? (
+              <span className="property-trend property-trend--up">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="18 15 12 9 6 15"/>
+                </svg>
+                Market trending up
+              </span>
+            ) : property.estimatedValue < property.price ? (
+              <span className="property-trend property-trend--down">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+                Market trending down
+              </span>
+            ) : (
+              <span className="property-trend property-trend--flat">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Market stable
+              </span>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );

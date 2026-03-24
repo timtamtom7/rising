@@ -16,6 +16,7 @@ import { Properties } from './pages/Properties';
 import { Milestones } from './pages/Milestones';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { MortgagePage } from './pages/MortgagePage';
+import { Agents } from './pages/Agents';
 import './index.css';
 
 function AppLayout({ children, totalSaved, currency }) {
@@ -48,6 +49,9 @@ export default function App() {
     updateMilestone,
     toggleMilestone,
     dismissNotification,
+    addAgent,
+    updateAgent,
+    deleteAgent,
   } = useGoals();
 
   const { settings } = data;
@@ -218,6 +222,20 @@ export default function App() {
         />
 
         <Route
+          path="/app/agents"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <Agents
+                agents={data.agents}
+                onAddAgent={addAgent}
+                onDeleteAgent={deleteAgent}
+                onUpdateAgent={updateAgent}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
           path="/app/notifications"
           element={
             <AppLayout totalSaved={totalSaved} currency={settings.currency}>
@@ -226,6 +244,7 @@ export default function App() {
                 onDismiss={dismissNotification}
                 goals={data.goals}
                 properties={data.properties}
+                agents={data.agents}
               />
             </AppLayout>
           }

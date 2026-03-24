@@ -168,3 +168,34 @@
   border-color: var(--color-error);
   box-shadow: 0 0 0 1px var(--color-error), var(--shadow-sm);
 }
+
+.property-card-trend {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.property-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.property-trend--up {
+  color: #059669;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.property-trend--down {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.10);
+}
+
+.property-trend--flat {
+  color: var(--text-secondary);
+  background: var(--surface-3);
+}

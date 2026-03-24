@@ -136,3 +136,13 @@ export function buildAlertNotification(message, subtext) {
     createdAt: new Date().toISOString(),
   };
 }
+
+export function buildAgentReminderNotification(agentName) {
+  return {
+    id: `agent-reminder-${Date.now()}`,
+    type: 'reminder',
+    message: `Follow up with ${agentName}?`,
+    subtext: "It's been a while since your last interaction.",
+    createdAt: new Date().toISOString(),
+  };
+}

@@ -4,7 +4,7 @@ import './Milestones.css';
 
 export function Milestones({ milestones, onToggleMilestone, onUpdateMilestone, goals = [], currency = 'USD' }) {
   const [editingId, setEditingId] = useState(null);
-  const [editForm, setEditForm] = useState({ amount: '', lender: '', date: '' });
+  const [editForm, setEditForm] = useState({ amount: '', lender: '', date: '', offerAmount: '', offerStatus: '', closingDate: '' });
 
   function handleToggle(id, completed) {
     onToggleMilestone(id, completed ? new Date().toISOString() : null);
@@ -13,7 +13,7 @@ export function Milestones({ milestones, onToggleMilestone, onUpdateMilestone, g
   function handleAddOrUpdate(data) {
     onUpdateMilestone(data);
     setEditingId(null);
-    setEditForm({ amount: '', lender: '', date: '' });
+    setEditForm({ amount: '', lender: '', date: '', offerAmount: '', offerStatus: '', closingDate: '' });
   }
 
   function startEdit(id, current) {
@@ -22,11 +22,15 @@ export function Milestones({ milestones, onToggleMilestone, onUpdateMilestone, g
       amount: current?.amount ? String(current.amount) : '',
       lender: current?.lender || '',
       date: current?.date || '',
+      offerAmount: current?.offerAmount ? String(current.offerAmount) : '',
+      offerStatus: current?.offerStatus || '',
+      closingDate: current?.closingDate || '',
     });
   }
 
   const preApprovedMilestone = milestones.find((m) => m.type === 'pre_approved');
   const downPaymentMilestone = milestones.find((m) => m.type === 'down_payment_saved');
+  const offerMilestone = milestones.find((m) => m.type === 'offer_made');
   const activeGoal = goals.find((g) => !g.archived);
 
   return (
@@ -117,6 +121,51 @@ export function Milestones({ milestones, onToggleMilestone, onUpdateMilestone, g
             </div>
           )}
 
+          {/* Offer tracker */}
+          <div className="milestone-detail-card">
+            <div className="milestone-detail-card-header">
+              <h3>Offer Tracker</h3>
+              {offerMilestone && (
+                <button
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => startEdit(offerMilestone.id, offerMilestone)}
+                >
+                  Edit
+                </button>
+              )}
+            </div>
+            {offerMilestone ? (
+              <div className="milestone-detail-content">
+                <div className="milestone-detail-row">
+                  <span className="milestone-detail-label">Offer Amount</span>
+                  <span className="milestone-detail-value amount">
+                    {offerMilestone.offerAmount
+                      ? `$${Number(offerMilestone.offerAmount).toLocaleString()}`
+                      : '—'}
+                  </span>
+                </div>
+                <div className="milestone-detail-row">
+                  <span className="milestone-detail-label">Status</span>
+                  <span className={`milestone-offer-status milestone-offer-status--${offerMilestone.offerStatus || 'pending'}`}>
+                    {offerMilestone.offerStatus
+                      ? offerMilestone.offerStatus.charAt(0).toUpperCase() + offerMilestone.offerStatus.slice(1)
+                      : 'Pending'}
+                  </span>
+                </div>
+                <div className="milestone-detail-row">
+                  <span className="milestone-detail-label">Closing Date</span>
+                  <span className="milestone-detail-value">
+                    {offerMilestone.closingDate || '—'}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <AddOfferDetailForm
+                onSubmit={handleAddOrUpdate}
+              />
+            )}
+          </div>
+
           {/* How much do you need? recalc */}
           {activeGoal && (
             <div className="need-calculator">
@@ -193,6 +242,57 @@ function AddMilestoneDetailForm({ milestoneType, onSubmit }) {
       )}
       <button type="submit" className="btn btn-primary btn-sm btn-full">
         Save Details
+      </button>
+    </form>
+  );
+}
+
+function AddOfferDetailForm({ onSubmit }) {
+  const [form, setForm] = useState({ offerAmount: '', offerStatus: 'pending', closingDate: '' });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit({
+      type: 'offer_made',
+      completedAt: new Date().toISOString(),
+      offerAmount: form.offerAmount ? parseFloat(form.offerAmount) : null,
+      offerStatus: form.offerStatus,
+      closingDate: form.closingDate,
+    });
+  }
+
+  return (
+    <form className="milestone-detail-form" onSubmit={handleSubmit}>
+      <div className="milestone-form-field">
+        <label>Offer Amount</label>
+        <input
+          type="number"
+          placeholder="e.g. 640000"
+          value={form.offerAmount}
+          onChange={(e) => setForm({ ...form, offerAmount: e.target.value })}
+        />
+      </div>
+      <div className="milestone-form-field">
+        <label>Status</label>
+        <select
+          value={form.offerStatus}
+          onChange={(e) => setForm({ ...form, offerStatus: e.target.value })}
+        >
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div className="milestone-form-field">
+        <label>Closing Date</label>
+        <input
+          type="date"
+          value={form.closingDate}
+          onChange={(e) => setForm({ ...form, closingDate: e.target.value })}
+        />
+      </div>
+      <button type="submit" className="btn btn-primary btn-sm btn-full">
+        Save Offer
       </button>
     </form>
   );

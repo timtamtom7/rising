@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { NotificationsCenter, buildProgressNotification, buildReminderNotification, buildAlertNotification } from '../components/NotificationsCenter';
+import { NotificationsCenter, buildProgressNotification, buildReminderNotification, buildAlertNotification, buildAgentReminderNotification } from '../components/NotificationsCenter';
 import './NotificationsPage.css';
 
-export function NotificationsPage({ notifications, onDismiss, goals = [], properties = [] }) {
+export function NotificationsPage({ notifications, onDismiss, goals = [], properties = [], agents = [] }) {
   // Auto-generate contextual notifications
   const generatedNotifications = useMemo(() => {
     const notifs = [];
@@ -44,8 +44,13 @@ export function NotificationsPage({ notifications, onDismiss, goals = [], proper
       }
     });
 
+    // Agent follow-up reminder — show for first agent in the list
+    if (agents.length > 0) {
+      notifs.push(buildAgentReminderNotification(agents[0].name));
+    }
+
     return notifs;
-  }, [goals, properties]);
+  }, [goals, properties, agents]);
 
   const allNotifications = [...generatedNotifications, ...notifications.filter((n) => !n.dismissedAt)];
 

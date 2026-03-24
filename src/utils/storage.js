@@ -7,6 +7,7 @@ const defaultData = {
   properties: [],
   milestones: [],
   notifications: [],
+  agents: [],
   settings: {
     currency: 'USD',
     theme: 'light',
@@ -77,7 +78,7 @@ export function createProperty({ name, address, price, link, photos, notes, esti
   };
 }
 
-export function createMilestone({ goalId, type, label, completedAt, amount, lender, date }) {
+export function createMilestone({ goalId, type, label, completedAt, amount, lender, date, offerAmount, offerStatus, closingDate }) {
   return {
     id: generateId(),
     goalId,
@@ -87,6 +88,20 @@ export function createMilestone({ goalId, type, label, completedAt, amount, lend
     amount: amount || null,
     lender: lender || '',
     date: date || null,
+    offerAmount: offerAmount || null,
+    offerStatus: offerStatus || null, // 'pending' | 'accepted' | 'rejected' | null
+    closingDate: closingDate || null,
+    createdAt: new Date().toISOString(),
+  };
+}
+
+export function createAgent({ name, phone, email, notes }) {
+  return {
+    id: generateId(),
+    name: name || '',
+    phone: phone || '',
+    email: email || '',
+    notes: notes || '',
     createdAt: new Date().toISOString(),
   };
 }
