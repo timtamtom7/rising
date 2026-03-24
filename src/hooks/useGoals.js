@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { loadData, saveData, createGoal, createDeposit } from '../utils/storage';
+import { loadData, saveData, createGoal, createDeposit, createProperty, createMilestone } from '../utils/storage';
 
 export function useGoals() {
   const [data, setData] = useState(() => loadData());
@@ -106,6 +106,63 @@ export function useGoals() {
     return JSON.stringify(data, null, 2);
   }, [data]);
 
+  // ── Properties ──────────────────────────────────────────────
+  const addProperty = useCallback((propertyData) => {
+    const property = createProperty(propertyData);
+    setData((prev) => ({ ...prev, properties: [property, ...prev.properties] }));
+    return property;
+  }, []);
+
+  const updateProperty = useCallback((id, updates) => {
+    setData((prev) => ({
+      ...prev,
+      properties: prev.properties.map((p) => (p.id === id ? { ...p, ...updates } : p)),
+    }));
+  }, []);
+
+  const deleteProperty = useCallback((id) => {
+    setData((prev) => ({
+      ...prev,
+      properties: prev.properties.filter((p) => p.id !== id),
+    }));
+  }, []);
+
+  // ── Milestones ──────────────────────────────────────────────
+  const updateMilestone = useCallback((data) => {
+    setData((prev) => {
+      const existing = prev.milestones.find((m) => m.type === data.type);
+      if (existing) {
+        return {
+          ...prev,
+          milestones: prev.milestones.map((m) =>
+            m.id === existing.id ? { ...m, ...data } : m
+          ),
+        };
+      }
+      const milestone = createMilestone({ ...data, goalId: null });
+      return { ...prev, milestones: [...prev.milestones, milestone] };
+    });
+  }, []);
+
+  const toggleMilestone = useCallback((id, completedAt) => {
+    setData((prev) => ({
+      ...prev,
+      milestones: prev.milestones.map((m) =>
+        m.id === id ? { ...m, completedAt } : m
+      ),
+    }));
+  }, []);
+
+  // ── Notifications ───────────────────────────────────────────
+  const dismissNotification = useCallback((id) => {
+    setData((prev) => ({
+      ...prev,
+      notifications: prev.notifications.map((n) =>
+        n.id === id ? { ...n, dismissedAt: new Date().toISOString() } : n
+      ),
+    }));
+  }, []);
+
   return {
     data,
     addGoal,
@@ -120,5 +177,11 @@ export function useGoals() {
     getAllDeposits,
     getTotalSaved,
     exportData,
+    addProperty,
+    updateProperty,
+    deleteProperty,
+    updateMilestone,
+    toggleMilestone,
+    dismissNotification,
   };
 }

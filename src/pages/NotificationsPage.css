@@ -1,0 +1,43 @@
+.notif-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+.notif-page-header {
+  margin-bottom: var(--space-8);
+}
+
+.notif-page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.notif-page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.notif-page-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.notif-page-section {
+  /* full width section */
+}
+
+.notif-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+}

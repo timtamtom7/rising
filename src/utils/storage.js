@@ -4,6 +4,9 @@ const STORAGE_KEY = 'rising_data';
 
 const defaultData = {
   goals: [],
+  properties: [],
+  milestones: [],
+  notifications: [],
   settings: {
     currency: 'USD',
     theme: 'light',
@@ -54,6 +57,36 @@ export function createDeposit({ amount, note }) {
     id: generateId(),
     amount: parseFloat(amount),
     note: note || '',
+    createdAt: new Date().toISOString(),
+  };
+}
+
+export function createProperty({ name, address, price, link, photos, notes, estimatedValue }) {
+  return {
+    id: generateId(),
+    name,
+    address: address || '',
+    price: parseFloat(price) || 0,
+    link: link || '',
+    photos: photos || [],
+    notes: notes || '',
+    estimatedValue: parseFloat(estimatedValue) || null,
+    createdAt: new Date().toISOString(),
+    priceDroppedAt: null,
+    listedAt: new Date().toISOString(),
+  };
+}
+
+export function createMilestone({ goalId, type, label, completedAt, amount, lender, date }) {
+  return {
+    id: generateId(),
+    goalId,
+    type,
+    label: label || type,
+    completedAt: completedAt || null,
+    amount: amount || null,
+    lender: lender || '',
+    date: date || null,
     createdAt: new Date().toISOString(),
   };
 }

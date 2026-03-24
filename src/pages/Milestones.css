@@ -1,0 +1,143 @@
+.milestones-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+.milestones-header {
+  margin-bottom: var(--space-8);
+}
+
+.milestones-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.milestones-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.milestones-tracker-section {
+  /* Main tracker */
+}
+
+.milestones-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.milestone-detail-card {
+  background: var(--surface-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: var(--space-5);
+}
+
+.milestone-detail-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.milestone-detail-card-header h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.milestone-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.milestone-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.milestone-detail-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.milestone-detail-value {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.milestone-detail-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.milestone-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.milestone-form-field label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.need-calculator {
+  background: var(--surface-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: var(--space-5);
+}
+
+.need-calculator-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.need-calculator-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.need-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.need-row--remaining {
+  font-weight: 700;
+  color: var(--color-accent);
+  font-size: var(--text-base);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-default);
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+  .milestones-page { padding: var(--space-4); }
+}

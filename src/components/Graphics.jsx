@@ -1,6 +1,100 @@
 // Custom SVG Graphics for Rising
 import './Graphics.css';
 
+export function MilestoneIllustration({ className = '' }) {
+  return (
+    <svg className={`milestone-illustration ${className}`} viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Milestone steps connected by dashed line */}
+      {[
+        { cx: 30, cy: 40, r: 18, filled: true },
+        { cx: 90, cy: 40, r: 14, filled: true },
+        { cx: 150, cy: 40, r: 14, filled: false },
+        { cx: 210, cy: 40, r: 18, filled: false },
+      ].map((circle, i) => (
+        <g key={i}>
+          {i > 0 && (
+            <line
+              x1={[30, 90, 150][i - 1]}
+              y1="40"
+              x2={circle.cx - circle.r}
+              y2="40"
+              stroke="var(--surface-4)"
+              strokeWidth="2"
+              strokeDasharray="4 4"
+            />
+          )}
+          <circle
+            cx={circle.cx}
+            cy={circle.cy}
+            r={circle.r}
+            fill={circle.filled ? 'var(--color-accent)' : 'var(--surface-3)'}
+            stroke={circle.filled ? 'var(--color-accent)' : 'var(--surface-4)'}
+            strokeWidth="2"
+          />
+          {circle.filled && (
+            <path
+              d={`M${circle.cx - 6} ${circle.cy} l4 4 l8 -8`}
+              stroke="white"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          )}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function MortgageIllustration({ className = '' }) {
+  return (
+    <svg className={`mortgage-illustration ${className}`} viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mg-card" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#ffffff"/>
+          <stop offset="100%" stopColor="#f4f4f5"/>
+        </linearGradient>
+      </defs>
+      {/* Card */}
+      <rect x="20" y="20" width="160" height="120" rx="12" fill="url(#mg-card)" stroke="#e4e4e7" strokeWidth="1.5"/>
+      {/* Dollar sign */}
+      <text x="100" y="65" textAnchor="middle" fontSize="28" fontWeight="700" fontFamily="Inter, sans-serif" fill="#22c55e">$</text>
+      {/* Monthly label */}
+      <text x="100" y="88" textAnchor="middle" fontSize="10" fontFamily="Inter, sans-serif" fill="#71717a">per month</text>
+      {/* Progress bar */}
+      <rect x="35" y="100" width="130" height="6" rx="3" fill="#f4f4f5"/>
+      <rect x="35" y="100" width="78" height="6" rx="3" fill="#22c55e"/>
+      {/* Breakdown dots */}
+      <circle cx="55" cy="125" r="4" fill="#e4e4e7"/>
+      <circle cx="80" cy="125" r="4" fill="#22c55e"/>
+      <circle cx="105" cy="125" r="4" fill="#fde047"/>
+      <circle cx="130" cy="125" r="4" fill="#e4e4e7"/>
+    </svg>
+  );
+}
+
+export function AlertIllustration({ className = '' }) {
+  return (
+    <svg className={`alert-illustration ${className}`} viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="al-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fef2f2"/>
+          <stop offset="100%" stopColor="#fee2e2"/>
+        </linearGradient>
+      </defs>
+      {/* Bell */}
+      <path d="M100 20 C80 20 65 35 65 55 L65 80 L135 80 L135 55 C135 35 120 20 100 20 Z" fill="#fef2f2" stroke="#ef4444" strokeWidth="1.5"/>
+      <path d="M80 80 C80 90 88 98 100 98 C112 98 120 90 120 80" fill="#fecaca"/>
+      <circle cx="100" cy="108" r="6" fill="#ef4444"/>
+      {/* Alert triangle */}
+      <path d="M100 40 L88 70 L112 70 Z" fill="#ef4444"/>
+      <line x1="100" y1="50" x2="100" y2="60" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+      <circle cx="100" cy="65" r="1.5" fill="white"/>
+    </svg>
+  );
+}
+
 export function HouseIllustration({ className = '' }) {
   return (
     <svg className={`house-illustration ${className}`} viewBox="0 0 200 180" fill="none" xmlns="http://www.w3.org/2000/svg">

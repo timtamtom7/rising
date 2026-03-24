@@ -1,0 +1,95 @@
+.mortgage-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+.mortgage-page-header {
+  margin-bottom: var(--space-8);
+}
+
+.mortgage-page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.mortgage-page-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mortgage-page-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.mortgage-page-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mortgage-page-tip {
+  background: var(--surface-2);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.mortgage-tip-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mortgage-page-tip--rates .mortgage-tip-icon {
+  background: rgba(245, 158, 11, 0.10);
+  color: var(--color-accent-warm);
+}
+
+.mortgage-page-tip--rule .mortgage-tip-icon {
+  background: var(--color-success-subtle);
+  color: var(--color-success);
+}
+
+.mortgage-tip-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--space-1);
+}
+
+.mortgage-tip-value {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.mortgage-tip-amount {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .mortgage-page-grid {
+    grid-template-columns: 1fr;
+  }
+  .mortgage-page { padding: var(--space-4); }
+}

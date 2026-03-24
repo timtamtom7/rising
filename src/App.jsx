@@ -12,6 +12,10 @@ import { EditGoal } from './pages/EditGoal';
 import { History } from './pages/History';
 import { Settings } from './pages/Settings';
 import { Pricing } from './pages/Pricing';
+import { Properties } from './pages/Properties';
+import { Milestones } from './pages/Milestones';
+import { NotificationsPage } from './pages/NotificationsPage';
+import { MortgagePage } from './pages/MortgagePage';
 import './index.css';
 
 function AppLayout({ children, totalSaved, currency }) {
@@ -38,6 +42,12 @@ export default function App() {
     getAllDeposits,
     getTotalSaved,
     exportData,
+    addProperty,
+    updateProperty,
+    deleteProperty,
+    updateMilestone,
+    toggleMilestone,
+    dismissNotification,
   } = useGoals();
 
   const { settings } = data;
@@ -159,6 +169,63 @@ export default function App() {
                 data={data}
                 onUpdateSettings={updateSettings}
                 onExportData={exportData}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/properties"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <Properties
+                properties={data.properties}
+                onAddProperty={addProperty}
+                onDeleteProperty={deleteProperty}
+                onUpdateProperty={updateProperty}
+                currency={settings.currency}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/milestones"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <Milestones
+                milestones={data.milestones}
+                onToggleMilestone={toggleMilestone}
+                onUpdateMilestone={updateMilestone}
+                goals={data.goals}
+                currency={settings.currency}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/mortgage"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <MortgagePage
+                goals={data.goals}
+                properties={data.properties}
+                currency={settings.currency}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/notifications"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <NotificationsPage
+                notifications={data.notifications}
+                onDismiss={dismissNotification}
+                goals={data.goals}
+                properties={data.properties}
               />
             </AppLayout>
           }
