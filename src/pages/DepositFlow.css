@@ -1,0 +1,213 @@
+.deposit-flow {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-16);
+}
+
+.deposit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.deposit-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.deposit-preview {
+  background: var(--surface-2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.deposit-preview-photo {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.deposit-preview-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deposit-preview-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 70%);
+  transition: clip-path 600ms var(--ease-out);
+}
+
+.deposit-preview-gradient {
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-warm) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-5);
+}
+
+.deposit-preview-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.deposit-preview-fill {
+  height: 100%;
+  background: white;
+  border-radius: var(--radius-full);
+  transition: width 400ms var(--ease-out);
+}
+
+.deposit-preview-info {
+  padding: var(--space-4) var(--space-5);
+}
+
+.deposit-preview-goal {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.deposit-preview-amounts {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.deposit-preview-current {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+.deposit-preview-sep { color: var(--text-tertiary); }
+.deposit-preview-target { font-size: 1rem; color: var(--text-secondary); }
+
+.deposit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form-group label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.label-hint {
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.amount-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.amount-prefix {
+  position: absolute;
+  left: var(--space-4);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.amount-input-wrap input {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding-left: calc(var(--space-4) + 2ch);
+  background: var(--surface-3);
+  border-color: var(--border-default);
+}
+
+.amount-input-wrap input::placeholder {
+  color: var(--text-disabled);
+}
+
+.field-error {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  margin-top: var(--space-2);
+}
+
+.note-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.note-chip {
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-3);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.note-chip:hover {
+  background: var(--surface-4);
+  color: var(--text-primary);
+}
+
+.note-chip--selected {
+  background: var(--color-accent-subtle);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.custom-note-input {
+  margin-top: var(--space-3);
+}
+
+.completion-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-success-subtle);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-success);
+  animation: bounceIn 300ms var(--ease-spring) forwards;
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.deposit-submit {
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.deposit-not-found {
+  text-align: center;
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
