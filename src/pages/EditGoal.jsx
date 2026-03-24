@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { parseCurrencyInput } from '../utils/formatCurrency';
+import { parseCurrencyInput, CURRENCY_SYMBOLS } from '../utils/formatCurrency';
 import './EditGoal.css';
 
 export function EditGoal({ goals, onUpdateGoal, currency }) {
@@ -87,7 +87,7 @@ export function EditGoal({ goals, onUpdateGoal, currency }) {
         <div className="form-group">
           <label htmlFor="targetAmount">Target amount</label>
           <div className="input-prefix-wrap">
-            <span className="input-prefix">{currency}</span>
+            <span className="input-prefix">{CURRENCY_SYMBOLS[currency] || '$'}</span>
             <input
               id="targetAmount"
               type="text"

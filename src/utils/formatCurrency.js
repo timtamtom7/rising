@@ -1,4 +1,4 @@
-const CURRENCY_SYMBOLS = {
+export const CURRENCY_SYMBOLS = {
   USD: '$',
   EUR: '€',
   GBP: '£',

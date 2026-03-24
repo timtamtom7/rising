@@ -9,7 +9,9 @@
 
 .goal-hero-photo {
   position: relative;
-  height: 320px;
+  height: 50vh;
+  min-height: 280px;
+  max-height: 480px;
   overflow: hidden;
   background: var(--surface-3);
 }
@@ -159,7 +161,18 @@
 }
 
 .goal-progress-bar {
-  height: 12px;
+  height: 10px;
+}
+
+/* Deposit pulse — brief scale-up when returning from deposit flow */
+@keyframes depositPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.goal-detail--just-deposited .goal-stats {
+  animation: depositPulse 200ms var(--ease-out) forwards;
 }
 
 .milestone {
@@ -280,7 +293,7 @@
 }
 
 @media (max-width: 640px) {
-  .goal-hero-photo { height: 240px; }
+  .goal-hero-photo { height: 45vw; min-height: 220px; }
   .goal-body { padding: var(--space-4); }
   .stat-current { font-size: 2rem; }
 }

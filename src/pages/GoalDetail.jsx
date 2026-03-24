@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { formatCurrency } from '../utils/formatCurrency';
 import { Confetti } from '../components/Confetti';
 import './GoalDetail.css';
@@ -7,13 +7,20 @@ import './GoalDetail.css';
 export function GoalDetail({ goals, onUpdateGoal, onDeleteGoal, currency }) {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const goal = goals.find((g) => g.id === id);
 
   const [showActions, setShowActions] = useState(false);
-  const [showDepositModal, setShowDepositModal] = useState(false);
-  const [depositAmount, setDepositAmount] = useState('');
-  const [depositNote, setDepositNote] = useState('');
-  const [depositError, setDepositError] = useState('');
+  const [justDeposited, setJustDeposited] = useState(false);
+
+  // Detect return from deposit flow and trigger pulse
+  useEffect(() => {
+    if (location.state?.justDeposited) {
+      setJustDeposited(true);
+      const timer = setTimeout(() => setJustDeposited(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
 
   if (!goal) {
     return (
@@ -35,16 +42,6 @@ export function GoalDetail({ goals, onUpdateGoal, onDeleteGoal, currency }) {
 
   const amountLeft = Math.max(0, goal.targetAmount - goal.currentAmount);
 
-  function handleDepositSubmit(e) {
-    e.preventDefault();
-    const amount = parseFloat(depositAmount.replace(/[^0-9.]/g, ''));
-    if (!amount || amount <= 0) {
-      setDepositError('Enter a valid amount.');
-      return;
-    }
-    navigate(`/app/goals/${goal.id}/deposit`, { state: { amount, note: depositNote } });
-  }
-
   function handleArchive() {
     onUpdateGoal(goal.id, { archived: !goal.archived });
     setShowActions(false);
@@ -58,7 +55,7 @@ export function GoalDetail({ goals, onUpdateGoal, onDeleteGoal, currency }) {
   }
 
   return (
-    <div className="goal-detail page-enter">
+    <div className={`goal-detail page-enter${justDeposited ? ' goal-detail--just-deposited' : ''}`}>
       <Confetti active={isCompleted} />
 
       <div className="goal-hero">

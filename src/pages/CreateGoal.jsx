@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { parseCurrencyInput } from '../utils/formatCurrency';
+import { parseCurrencyInput, CURRENCY_SYMBOLS } from '../utils/formatCurrency';
 import './CreateGoal.css';
 
 const UNSPLASH_TOPICS = [
@@ -129,7 +129,7 @@ export function CreateGoal({ onCreate, currency }) {
             <div className="form-group">
               <label htmlFor="targetAmount">Target amount</label>
               <div className="input-prefix-wrap">
-                <span className="input-prefix">{currency === 'USD' ? '$' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : currency}</span>
+                <span className="input-prefix">{CURRENCY_SYMBOLS[currency] || '$'}</span>
                 <input
                   id="targetAmount"
                   type="text"
@@ -160,7 +160,7 @@ export function CreateGoal({ onCreate, currency }) {
                 Already saved <span className="label-hint">(optional)</span>
               </label>
               <div className="input-prefix-wrap">
-                <span className="input-prefix">{currency === 'USD' ? '$' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : currency}</span>
+                <span className="input-prefix">{CURRENCY_SYMBOLS[currency] || '$'}</span>
                 <input
                   id="startingAmount"
                   type="text"
@@ -303,11 +303,11 @@ export function CreateGoal({ onCreate, currency }) {
               {form.targetAmount && (
                 <div className="goal-preview-amounts">
                   <span className="goal-preview-current amount">
-                    {currency}{parseCurrencyInput(form.startingAmount).toLocaleString()}
+                    {CURRENCY_SYMBOLS[currency] || '$'}{parseCurrencyInput(form.startingAmount).toLocaleString()}
                   </span>
                   <span className="goal-preview-sep">/</span>
                   <span className="goal-preview-target amount">
-                    {currency}{parseCurrencyInput(form.targetAmount).toLocaleString()}
+                    {CURRENCY_SYMBOLS[currency] || '$'}{parseCurrencyInput(form.targetAmount).toLocaleString()}
                   </span>
                 </div>
               )}

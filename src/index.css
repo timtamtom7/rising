@@ -1,5 +1,90 @@
 /* Rising — Global Styles */
-@import './styles/tokens.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --color-accent: #22c55e;
+  --color-accent-subtle: rgba(34, 197, 94, 0.12);
+  --color-accent-hover: #16a34a;
+  --color-accent-text: #ffffff;
+  --color-accent-warm: #f59e0b;
+  --color-error: #ef4444;
+  --color-error-subtle: rgba(239, 68, 68, 0.10);
+  --color-success: #22c55e;
+  --color-success-subtle: rgba(34, 197, 94, 0.10);
+
+  --surface-1: #fafaf9;
+  --surface-2: #ffffff;
+  --surface-3: #f4f4f5;
+  --surface-4: #e4e4e7;
+  --surface-1-dark: #0f0f0e;
+  --surface-2-dark: #1a1a19;
+  --surface-3-dark: #272725;
+  --surface-4-dark: #3f3f3d;
+
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --text-tertiary: #a1a1aa;
+  --text-disabled: #d4d4d8;
+  --text-primary-dark: #fafaf9;
+  --text-secondary-dark: #a1a1aa;
+  --text-tertiary-dark: #71717a;
+  --text-disabled-dark: #52525b;
+
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.10);
+  --border-strong: rgba(0, 0, 0, 0.18);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 100ms;
+  --duration-normal: 150ms;
+  --duration-slow: 250ms;
+  --duration-page: 300ms;
+  --duration-reveal: 400ms;
+}
+
+[data-theme="dark"] {
+  --surface-1: #0f0f0e;
+  --surface-2: #1a1a19;
+  --surface-3: #272725;
+  --surface-4: #3f3f3d;
+  --text-primary: #fafaf9;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-disabled: #52525b;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -16,11 +101,16 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--surface-1);
+  background: radial-gradient(ellipse at 50% 0%, #fafaf9 0%, #f0f0ed 70%);
   color: var(--text-primary);
   min-height: 100vh;
   transition: background var(--duration-slow) var(--ease-out),
               color var(--duration-slow) var(--ease-out);
+}
+
+[data-theme="dark"] body,
+body.dark {
+  background: var(--surface-1);
 }
 
 #root {
@@ -183,14 +273,25 @@ input::placeholder, textarea::placeholder {
   padding: 0 var(--space-6);
 }
 
-/* Page transition */
+/* Page transition — fade */
 .page-enter {
   opacity: 0;
-  transform: translateY(12px);
-  animation: pageIn var(--duration-page) var(--ease-out) forwards;
+  animation: pageFadeIn var(--duration-page) var(--ease-out) forwards;
 }
-@keyframes pageIn {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* App layout */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
 }
 
 /* Staggered entrance */
@@ -251,7 +352,7 @@ input::placeholder, textarea::placeholder {
 /* Progress bar */
 .progress-bar {
   width: 100%;
-  height: 8px;
+  height: 10px;
   background: var(--surface-3);
   border-radius: var(--radius-full);
   overflow: hidden;
@@ -298,15 +399,15 @@ input::placeholder, textarea::placeholder {
 /* Confetti */
 @keyframes confettiFall {
   0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  100% { transform: translateY(100vh) rotate(540deg); opacity: 0; }
 }
 .confetti-piece {
   position: fixed;
   top: -10px;
   width: 8px;
   height: 8px;
-  border-radius: 2px;
-  animation: confettiFall 3s ease-in forwards;
+  border-radius: 50%;
+  animation: confettiFall 2s ease-in forwards;
   z-index: 9999;
   pointer-events: none;
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
-import { formatCurrency } from '../utils/formatCurrency';
+import { formatCurrency, CURRENCY_SYMBOLS } from '../utils/formatCurrency';
 import './DepositFlow.css';
 
 const NOTE_OPTIONS = ['Paycheck', 'Freelance', 'Gift', 'Bonus', 'Birthday money', 'Tax refund', 'Other'];
@@ -102,7 +102,7 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
         <div className="form-group">
           <label htmlFor="amount">How much are you depositing?</label>
           <div className="amount-input-wrap">
-            <span className="amount-prefix">{currency === 'USD' ? '$' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : currency}</span>
+            <span className="amount-prefix">{CURRENCY_SYMBOLS[currency] || '$'}</span>
             <input
               id="amount"
               type="text"

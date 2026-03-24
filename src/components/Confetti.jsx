@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const COLORS = ['#22c55e', '#f59e0b', '#8b5cf6', '#ec4899', '#3b82f6', '#f5f5f7'];
+const COLORS = ['#22c55e', '#f59e0b', '#8b5cf6', '#ec4899', '#3b82f6', '#f97316', '#06b6d4'];
 
 export function Confetti({ active }) {
   const [pieces, setPieces] = useState([]);
@@ -11,16 +11,16 @@ export function Confetti({ active }) {
     const newPieces = Array.from({ length: 60 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
-      delay: Math.random() * 1000,
-      duration: 2000 + Math.random() * 1500,
+      delay: Math.random() * 800,
+      duration: 2000,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
       size: 6 + Math.random() * 6,
-      rotate: Math.random() > 0.5 ? 'rotate' : 'square',
+      isCircle: Math.random() > 0.3,
     }));
 
     setPieces(newPieces);
 
-    const timer = setTimeout(() => setPieces([]), 4000);
+    const timer = setTimeout(() => setPieces([]), 3500);
     return () => clearTimeout(timer);
   }, [active]);
 
@@ -39,7 +39,7 @@ export function Confetti({ active }) {
             background: p.color,
             width: `${p.size}px`,
             height: `${p.size}px`,
-            borderRadius: p.rotate === 'square' ? '2px' : '50%',
+            borderRadius: p.isCircle ? '50%' : '2px',
           }}
         />
       ))}

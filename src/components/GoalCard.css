@@ -8,7 +8,7 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--duration-normal) var(--ease-out),
+  transition: transform 150ms var(--ease-out),
               box-shadow var(--duration-normal) var(--ease-out);
   cursor: pointer;
 }
@@ -28,7 +28,7 @@
 
 .goal-card-photo-wrap {
   position: relative;
-  height: 200px;
+  height: 240px;
   overflow: hidden;
 }
 
@@ -132,6 +132,6 @@
 
 @media (max-width: 640px) {
   .goal-card-photo-wrap {
-    height: 180px;
+    height: 200px;
   }
 }
