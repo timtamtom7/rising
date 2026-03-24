@@ -21,6 +21,9 @@ export function Nav({ totalSaved, currency }) {
 
         {isHome && (
           <div className="nav-right">
+            <Link to="/pricing" className="btn btn-ghost btn-sm nav-pricing">
+              Pricing
+            </Link>
             {totalSaved > 0 && (
               <div className="nav-total">
                 <span className="nav-total-label">Total saved</span>

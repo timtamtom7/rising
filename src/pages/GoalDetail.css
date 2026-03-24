@@ -292,6 +292,28 @@
   gap: var(--space-4);
 }
 
+.goal-not-found-graphic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-error-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-error);
+  margin-bottom: var(--space-2);
+}
+
+.goal-not-found h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.goal-not-found p {
+  color: var(--text-secondary);
+  max-width: 320px;
+}
+
 @media (max-width: 640px) {
   .goal-hero-photo { height: 45vw; min-height: 220px; }
   .goal-body { padding: var(--space-4); }

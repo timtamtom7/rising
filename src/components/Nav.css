@@ -67,3 +67,9 @@
   align-items: center;
   gap: var(--space-1);
 }
+
+.nav-pricing {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}

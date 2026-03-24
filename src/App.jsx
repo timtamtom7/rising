@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useGoals } from './hooks/useGoals';
 import { Nav } from './components/Nav';
 import { Landing } from './pages/Landing';
+import { Onboarding, isOnboardingComplete } from './pages/Onboarding';
 import { Home } from './pages/Home';
 import { CreateGoal } from './pages/CreateGoal';
 import { GoalDetail } from './pages/GoalDetail';
@@ -10,6 +11,7 @@ import { DepositFlow } from './pages/DepositFlow';
 import { EditGoal } from './pages/EditGoal';
 import { History } from './pages/History';
 import { Settings } from './pages/Settings';
+import { Pricing } from './pages/Pricing';
 import './index.css';
 
 function AppLayout({ children, totalSaved, currency }) {
@@ -40,6 +42,7 @@ export default function App() {
 
   const { settings } = data;
   const totalSaved = getTotalSaved();
+  const currentPlan = settings.subscription?.plan || 'free';
 
   // Apply theme on mount and change
   useEffect(() => {
@@ -51,6 +54,22 @@ export default function App() {
       <Routes>
         {/* Landing */}
         <Route path="/" element={<Landing />} />
+
+        {/* Onboarding */}
+        <Route
+          path="/onboarding"
+          element={
+            isOnboardingComplete()
+              ? <Navigate to="/app" replace />
+              : <Onboarding />
+          }
+        />
+
+        {/* Pricing */}
+        <Route
+          path="/pricing"
+          element={<Pricing currentPlan={currentPlan} />}
+        />
 
         {/* App routes */}
         <Route
@@ -70,7 +89,10 @@ export default function App() {
           path="/app/goals/new"
           element={
             <AppLayout totalSaved={totalSaved} currency={settings.currency}>
-              <CreateGoal onCreate={addGoal} currency={settings.currency} />
+              <CreateGoal
+                onCreate={addGoal}
+                currency={settings.currency}
+              />
             </AppLayout>
           }
         />

@@ -25,8 +25,14 @@ export function GoalDetail({ goals, onUpdateGoal, onDeleteGoal, currency }) {
   if (!goal) {
     return (
       <div className="goal-not-found page-enter">
+        <div className="goal-not-found-graphic">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+        </div>
         <h2>Goal not found</h2>
-        <p>This goal may have been deleted.</p>
+        <p>This goal may have been deleted or the link is invalid.</p>
         <Link to="/app" className="btn btn-primary">Back to goals</Link>
       </div>
     );

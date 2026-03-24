@@ -1,0 +1,49 @@
+/* Graphics — Custom SVG/CSS Components */
+
+.house-illustration {
+  display: block;
+}
+
+.map-illustration {
+  display: block;
+}
+
+/* Deposit progress ring */
+.deposit-progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deposit-progress-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.deposit-progress-pct {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.deposit-progress-text {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* Empty state house */
+.empty-state-house {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+}

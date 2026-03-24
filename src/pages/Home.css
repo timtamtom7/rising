@@ -91,21 +91,35 @@
 }
 
 .home-empty-icon {
-  color: var(--text-tertiary);
-  margin-bottom: var(--space-4);
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--color-accent-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  margin: 0 auto var(--space-6);
 }
 
 .home-empty h3 {
-  font-size: 1.25rem;
-  margin-bottom: var(--space-2);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
 }
 
 .home-empty p {
   color: var(--text-secondary);
-  margin-bottom: var(--space-6);
-  max-width: 360px;
+  margin-bottom: var(--space-8);
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.7;
+}
+
+.home-empty-graphic {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-6);
 }
 
 .home-nav-links {

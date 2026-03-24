@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GoalCard } from '../components/GoalCard';
+import { HouseIllustration } from '../components/Graphics';
 import { formatCurrency } from '../utils/formatCurrency';
 import './Home.css';
 
@@ -59,14 +60,19 @@ export function Home({ goals, totalSaved, currency }) {
         <div className="home-empty">
           {filter === 'active' && (
             <>
+              <div className="home-empty-graphic">
+                <HouseIllustration style={{ width: 120, height: 'auto', opacity: 0.5, filter: 'grayscale(0.3)' }} />
+              </div>
               <div className="home-empty-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 8v4M12 16h.01"/>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
               </div>
-              <h3>No active goals yet</h3>
-              <p>Create your first savings goal and attach a photo to get started.</p>
+              <h3>Your home is waiting.</h3>
+              <p>
+                Set your deposit goal, pick a photo of your future home, and start watching your progress come alive with every dollar you save.
+              </p>
               <Link to="/app/goals/new" className="btn btn-primary">
                 Create your first goal
               </Link>
@@ -75,7 +81,7 @@ export function Home({ goals, totalSaved, currency }) {
           {filter === 'completed' && (
             <>
               <div className="home-empty-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                   <polyline points="22 4 12 14.01 9 11.01"/>
                 </svg>
@@ -87,7 +93,7 @@ export function Home({ goals, totalSaved, currency }) {
           {filter === 'archived' && (
             <>
               <div className="home-empty-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <polyline points="21 8 21 21 3 21 3 8"/>
                   <rect x="1" y="3" width="22" height="5"/>
                   <line x1="10" y1="12" x2="14" y2="12"/>

@@ -5,6 +5,15 @@ import './DepositFlow.css';
 
 const NOTE_OPTIONS = ['Paycheck', 'Freelance', 'Gift', 'Bonus', 'Birthday money', 'Tax refund', 'Other'];
 
+// Typical minimum down payments by home price
+function getMinDownPayment(targetAmount) {
+  if (targetAmount <= 100000) return 3000;
+  if (targetAmount <= 300000) return 5000;
+  if (targetAmount <= 500000) return 10000;
+  if (targetAmount <= 750000) return 20000;
+  return 35000;
+}
+
 export function DepositFlow({ goals, onAddDeposit, currency }) {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,11 +27,19 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
   const [customNote, setCustomNote] = useState('');
   const [showCustom, setShowCustom] = useState(false);
   const [error, setError] = useState('');
+  const [showLowAmountWarning, setShowLowAmountWarning] = useState(false);
 
   if (!goal) {
     return (
       <div className="deposit-not-found page-enter">
+        <div className="deposit-not-found-graphic">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+        </div>
         <h2>Goal not found</h2>
+        <p>This goal may have been deleted or the link is invalid.</p>
         <Link to="/app" className="btn btn-primary">Back to goals</Link>
       </div>
     );
@@ -34,11 +51,13 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
   const willComplete = parsedAmount > 0 && newTotal >= goal.targetAmount && goal.currentAmount < goal.targetAmount;
   const isCompleted = goal.currentAmount >= goal.targetAmount;
   const amountLeft = Math.max(0, goal.targetAmount - goal.currentAmount);
+  const minDownPayment = getMinDownPayment(goal.targetAmount);
 
   function handleAmountChange(e) {
     const val = e.target.value.replace(/[^0-9.]/g, '');
     setAmount(val);
     setError('');
+    setShowLowAmountWarning(false);
   }
 
   function handleNoteSelect(n) {
@@ -53,8 +72,15 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     if (!parsedAmount || parsedAmount <= 0) {
       setError('Enter an amount to deposit.');
+      return;
+    }
+
+    // Check if below typical down payment minimum
+    if (parsedAmount > 0 && parsedAmount < 100) {
+      setError(`$${parsedAmount} seems too low for a home deposit. Most deposits are at least $100.`);
       return;
     }
 
@@ -102,6 +128,11 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
             <span className="deposit-preview-sep">/</span>
             <span className="deposit-preview-target">{formatCurrency(goal.targetAmount, currency)}</span>
           </div>
+          {amountLeft > 0 && (
+            <p className="deposit-preview-remaining">
+              {formatCurrency(amountLeft, currency)} to go
+            </p>
+          )}
         </div>
       </div>
 
@@ -120,7 +151,25 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
               autoFocus
             />
           </div>
-          {error && <span className="field-error">{error}</span>}
+          {error && (
+            <span className="field-error">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4M12 16h.01"/>
+              </svg>
+              {error}
+            </span>
+          )}
+          {!error && parsedAmount > 0 && parsedAmount < 100 && (
+            <span className="field-warning">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              Small deposit noted — every bit counts toward your goal!
+            </span>
+          )}
         </div>
 
         <div className="form-group">
@@ -155,6 +204,16 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
             </svg>
             This deposit will complete your goal!
+          </div>
+        )}
+
+        {parsedAmount > 0 && !willComplete && amountLeft > 0 && (
+          <div className="deposit-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4M12 16h.01"/>
+            </svg>
+            At this rate, you need {formatCurrency(amountLeft / Math.max(1, parsedAmount), currency).replace('$', '')} more deposits to reach your goal.
           </div>
         )}
 

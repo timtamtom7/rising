@@ -7,6 +7,12 @@ const defaultData = {
   settings: {
     currency: 'USD',
     theme: 'light',
+    subscription: {
+      plan: 'free', // 'free' | 'homebuyer' | 'investor'
+      status: 'active', // 'active' | 'cancelled' | 'past_due'
+      subscribedAt: null,
+      expiresAt: null,
+    },
   },
 };
 
