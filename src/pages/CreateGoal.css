@@ -237,7 +237,7 @@
 .goal-preview-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+  background: linear-gradient(to top, var(--overlay-dark) 0%, transparent 60%);
 }
 
 .goal-preview-card {

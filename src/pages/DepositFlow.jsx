@@ -32,6 +32,8 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
   const newTotal = goal.currentAmount + parsedAmount;
   const newProgress = Math.min(100, (newTotal / goal.targetAmount) * 100);
   const willComplete = parsedAmount > 0 && newTotal >= goal.targetAmount && goal.currentAmount < goal.targetAmount;
+  const isCompleted = goal.currentAmount >= goal.targetAmount;
+  const amountLeft = Math.max(0, goal.targetAmount - goal.currentAmount);
 
   function handleAmountChange(e) {
     const val = e.target.value.replace(/[^0-9.]/g, '');
@@ -53,6 +55,11 @@ export function DepositFlow({ goals, onAddDeposit, currency }) {
     e.preventDefault();
     if (!parsedAmount || parsedAmount <= 0) {
       setError('Enter an amount to deposit.');
+      return;
+    }
+
+    if (parsedAmount > amountLeft && !isCompleted) {
+      setError(`You only need ${formatCurrency(amountLeft, currency)} more to reach your goal.`);
       return;
     }
 

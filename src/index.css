@@ -68,6 +68,13 @@
   --duration-slow: 250ms;
   --duration-page: 300ms;
   --duration-reveal: 400ms;
+
+  /* Overlay / mask colors (for photo reveal gradients) */
+  --overlay-dark: rgba(0, 0, 0, 0.65);
+  --overlay-strong: rgba(0, 0, 0, 0.70);
+  --overlay-medium: rgba(0, 0, 0, 0.30);
+  --overlay-light: rgba(0, 0, 0, 0.20);
+  --overlay-subtle: rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="dark"] {
@@ -214,8 +221,8 @@ a:hover { color: var(--color-accent-hover); }
 }
 
 .btn-danger {
-  background: #ef4444;
-  color: #fff;
+  background: var(--color-error);
+  color: var(--color-accent-text);
   border-color: transparent;
 }
 .btn-danger:hover {

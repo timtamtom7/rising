@@ -25,7 +25,7 @@
 .goal-hero-mask {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 40%, transparent 70%);
+  background: linear-gradient(to top, var(--overlay-strong) 0%, var(--overlay-subtle) 40%, transparent 70%);
   transition: clip-path 600ms var(--ease-out);
 }
 

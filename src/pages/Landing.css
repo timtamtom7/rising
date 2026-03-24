@@ -120,7 +120,7 @@
 .demo-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, transparent 80%);
+  background: linear-gradient(to top, var(--overlay-dark) 0%, var(--overlay-light) 50%, transparent 80%);
   transition: clip-path 800ms var(--ease-out);
 }
 
