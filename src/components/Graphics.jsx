@@ -222,6 +222,49 @@ export function DepositProgress({ percent = 0, size = 120, className = '' }) {
   );
 }
 
+export function ChartIllustration({ className = '' }) {
+  return (
+    <svg className={`chart-illustration ${className}`} viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ch-bar" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#22c55e" stopOpacity="0.9"/>
+          <stop offset="100%" stopColor="#22c55e" stopOpacity="0.5"/>
+        </linearGradient>
+      </defs>
+      {/* Grid lines */}
+      {[0.25, 0.5, 0.75, 1].map((frac, i) => (
+        <line key={i} x1="20" y1={20 + 100 * frac} x2="180" y2={20 + 100 * frac} stroke="#e4e4e7" strokeWidth="1" strokeDasharray="3 3"/>
+      ))}
+      {/* Bars */}
+      {[
+        { x: 30, h: 60 },
+        { x: 65, h: 90 },
+        { x: 100, h: 45 },
+        { x: 135, h: 110 },
+        { x: 170, h: 75 },
+      ].map((bar, i) => (
+        <rect key={i} x={bar.x} y={120 - bar.h} width="22" height={bar.h} rx="4" fill="url(#ch-bar)"/>
+      ))}
+      {/* X axis */}
+      <line x1="20" y1="120" x2="180" y2="120" stroke="#e4e4e7" strokeWidth="1.5"/>
+      {/* Trend line */}
+      <polyline
+        points="41,80 76,55 111,90 146,40 181,65"
+        fill="none"
+        stroke="#f59e0b"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="5 3"
+      />
+      {/* Dots */}
+      {[[41, 80], [76, 55], [111, 90], [146, 40], [181, 65]].map(([cx, cy], i) => (
+        <circle key={i} cx={cx} cy={cy} r="4" fill="#f59e0b"/>
+      ))}
+    </svg>
+  );
+}
+
 export function EmptyStateHouse({ className = '' }) {
   return (
     <div className={`empty-state-house ${className}`}>

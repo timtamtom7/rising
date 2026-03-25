@@ -17,6 +17,8 @@ import { Milestones } from './pages/Milestones';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { MortgagePage } from './pages/MortgagePage';
 import { Agents } from './pages/Agents';
+import { Charts } from './pages/Charts';
+import { Share } from './pages/Share';
 import './index.css';
 
 function AppLayout({ children, totalSaved, currency }) {
@@ -245,6 +247,33 @@ export default function App() {
                 goals={data.goals}
                 properties={data.properties}
                 agents={data.agents}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/charts"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <Charts
+                goals={data.goals}
+                getAllDeposits={getAllDeposits}
+                properties={data.properties}
+                currency={settings.currency}
+              />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/share"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <Share
+                goals={data.goals}
+                getTotalSaved={getTotalSaved}
+                currency={settings.currency}
               />
             </AppLayout>
           }
