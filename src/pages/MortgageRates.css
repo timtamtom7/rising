@@ -1,0 +1,465 @@
+/* Mortgage Rates Page */
+
+.mortgage-rates-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.rates-header {
+  margin-bottom: 2rem;
+}
+
+.rates-header-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #22c55e;
+  margin-bottom: 0.5rem;
+}
+
+.rates-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.rates-subtitle {
+  color: #71717a;
+  font-size: 1rem;
+}
+
+.rates-as-of {
+  font-size: 12px;
+  color: #a1a1aa;
+  margin-top: 0.5rem;
+}
+
+/* Loading */
+.rates-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4rem 2rem;
+  color: #71717a;
+}
+
+.rates-loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e4e4e7;
+  border-top-color: #22c55e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Home price input */
+.rates-home-price {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  padding: 12px 16px;
+  background: #f4fdf5;
+  border-radius: 10px;
+}
+
+.rates-home-price label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #166534;
+}
+
+.rates-home-price-input {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1.5px solid #dcfce7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rates-home-price-input input {
+  border: none;
+  outline: none;
+  padding: 6px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 120px;
+  background: transparent;
+}
+
+.afford-prefix {
+  padding: 6px 0 6px 10px;
+  color: #71717a;
+  font-weight: 600;
+}
+
+/* Rate cards grid */
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.rate-card {
+  background: white;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rate-card:hover {
+  border-color: #22c55e;
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.12);
+  transform: translateY(-1px);
+}
+
+.rate-card--selected {
+  border-color: #22c55e;
+  background: #f4fdf5;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+}
+
+.rate-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rate-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.rate-badge {
+  font-size: 10px;
+  font-weight: 600;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 2px 6px;
+  border-radius: 99px;
+}
+
+.rate-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rate-main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.rate-pct {
+  font-size: 28px;
+  font-weight: 800;
+  color: #18181b;
+  letter-spacing: -0.02em;
+}
+
+.rate-apr {
+  font-size: 12px;
+  color: #71717a;
+}
+
+.rate-description {
+  font-size: 12px;
+  color: #71717a;
+  line-height: 1.4;
+}
+
+.rate-payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.rate-payment-label {
+  font-size: 11px;
+  color: #a1a1aa;
+}
+
+.rate-payment-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #18181b;
+}
+
+/* Bottom grid */
+.rates-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .rates-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Rate chart */
+.rate-chart {
+  background: white;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.rate-chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.rate-chart-area {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 100px;
+  padding-bottom: 4px;
+}
+
+.rate-chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.rate-chart-bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rate-chart-bar {
+  width: 100%;
+  background: #dcfce7;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
+  min-height: 8px;
+}
+
+.rate-chart-bar--current {
+  background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.rate-chart-month {
+  font-size: 10px;
+  color: #a1a1aa;
+  font-weight: 500;
+}
+
+.rate-chart-value {
+  font-size: 9px;
+  color: #71717a;
+  font-weight: 600;
+}
+
+.rate-chart-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.rate-chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.rate-chart-note {
+  font-size: 10px;
+  color: #a1a1aa;
+}
+
+/* Affordability calc */
+.afford-section {
+  background: white;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.afford-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.afford-subtitle {
+  font-size: 12px;
+  color: #71717a;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.afford-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.afford-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.afford-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.afford-input-wrap input {
+  border: none;
+  outline: none;
+  padding: 7px 8px;
+  font-size: 14px;
+  width: 100%;
+  background: transparent;
+}
+
+.afford-input-wrap:focus-within {
+  border-color: #22c55e;
+  background: white;
+}
+
+.afford-result {
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.afford-result--green {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.afford-result--red {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.afford-result-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.afford-result--green .afford-result-status {
+  color: #15803d;
+}
+
+.afford-result--red .afford-result-status {
+  color: #dc2626;
+}
+
+.afford-result-detail {
+  font-size: 11px;
+  color: #71717a;
+  line-height: 1.4;
+}
+
+.afford-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.afford-summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #71717a;
+}
+
+.afford-summary-item span:last-child {
+  font-weight: 600;
+  color: #18181b;
+}
+
+.afford-summary-item--total {
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.afford-summary-item--total span:last-child {
+  color: #22c55e;
+  font-size: 14px;
+}
+
+/* Disclaimer */
+.rates-disclaimer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e4e4e7;
+}
+
+.rates-disclaimer svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #a1a1aa;
+}
+
+.rates-disclaimer p {
+  font-size: 11px;
+  color: #71717a;
+  line-height: 1.5;
+}

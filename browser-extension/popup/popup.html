@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rising</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup">
+    <div class="popup-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Rising</span>
+    </div>
+
+    <div class="popup-body">
+      <div class="stat-card">
+        <span class="stat-label">Total saved</span>
+        <span class="stat-value" id="total-saved">$0</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Savings goal</span>
+        <span class="stat-value" id="savings-goal">Not set</span>
+      </div>
+
+      <div class="progress-section" id="progress-section" style="display:none">
+        <div class="progress-header">
+          <span>Goal progress</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="progress-remaining" id="progress-remaining"></span>
+      </div>
+
+      <div class="sync-section">
+        <p class="sync-note">
+          Set your savings goal in the Rising app to see your progress here.
+        </p>
+      </div>
+    </div>
+
+    <div class="popup-footer">
+      <a href="http://localhost:5173/app" target="_blank" class="open-app-btn">
+        Open Rising App →
+      </a>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -19,6 +19,7 @@ import { MortgagePage } from './pages/MortgagePage';
 import { Agents } from './pages/Agents';
 import { Charts } from './pages/Charts';
 import { Share } from './pages/Share';
+import { MortgageRates } from './pages/MortgageRates';
 import './index.css';
 
 function AppLayout({ children, totalSaved, currency }) {
@@ -275,6 +276,15 @@ export default function App() {
                 getTotalSaved={getTotalSaved}
                 currency={settings.currency}
               />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/app/rates"
+          element={
+            <AppLayout totalSaved={totalSaved} currency={settings.currency}>
+              <MortgageRates />
             </AppLayout>
           }
         />

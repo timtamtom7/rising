@@ -45,6 +45,12 @@ export function Nav({ totalSaved, currency }) {
               </svg>
               Calculator
             </Link>
+            <Link to="/app/rates" className="btn btn-ghost btn-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              Rates
+            </Link>
             <Link to="/app/agents" className="btn btn-ghost btn-sm">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
