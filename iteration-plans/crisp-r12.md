@@ -34,6 +34,32 @@ Add video recording capability to Crisp, making it a complete meeting capture to
 
 ---
 
+## CrispMac Companion — Round 12: Desktop Widgets, Notifications & Advanced Playback
+
+### Desktop Widgets (WidgetKit)
+- **Small widget**: Quick record button + last recording timestamp
+- **Medium widget**: Recent 3 recordings with title + duration
+- **Large widget**: Full library view with search
+- **Lock Screen widget**: Record button accessible from Lock Screen
+
+### Advanced Notifications
+- **Actionable notifications**: "Meeting saved — tap to view" with inline playback controls
+- **Action item reminders**: Notification when an action item is due
+- **Weekly summary**: Friday digest showing meetings this week + action items
+
+### macOS Native Playback
+- **Picture-in-Picture**: Float video/audio playback over other windows
+- **Space theater mode**: Full-screen playback with distraction-free dark UI
+- **AirPlay**: Stream audio playback to AirPlay speakers
+- **Keyboard navigation**: Space to play/pause, ← → to skip 15s, J/K/L for playback control (YouTube-style)
+
+### Clip Sharing & Export
+- **Share menu integration**: Export audio/video clip via standard macOS Share menu
+- **Drag & drop**: Drag a clip from Crisp directly into Messages, Mail, Slack
+- **QuickLook preview**: Press Space on any recording in Finder to preview audio
+
+---
+
 ## Out of Scope
 - Crisp for Teams/org-level management (R13)
 - Crisp API for integrations (R14)

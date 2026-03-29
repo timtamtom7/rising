@@ -33,6 +33,32 @@ Transform Crisp from a personal voice recorder into an AI-powered meeting intell
 
 ---
 
+## CrispMac Companion — Round 11: Menu Bar & System Integration
+
+### Menu Bar Presence
+- **Menu bar icon**: Crisp icon in macOS menu bar — click to open quick capture window
+- **Quick capture popup**: Floating mini-window for one-tap recording without opening full app
+- **Now Playing in menu bar**: Show waveform icon that pulses during recording, static when idle
+- **Keyboard shortcuts**: Global hotkey (default ⌘⇧C) to start/stop recording from anywhere
+
+### System Audio Capture
+- **System audio recording**: Capture audio from any app (Zoom, Safari, etc.) using macOS screen recording audio path
+- **Microphone + system audio mix**: Record both voice and system audio simultaneously
+- **Audio source selector**: Choose input sources before recording (mic only, system only, or mixed)
+
+### iOS ↔ macOS Handoff
+- **Handoff support**: Start recording on iPhone, continue on Mac (and vice versa)
+- **Universal clipboard**: Copy transcribed text between devices seamlessly
+- **iCloud sync**: All notes sync via iCloud, available on both platforms instantly
+- **Continuity camera**: Use iPhone as microphone/camera input directly from Mac
+
+### Native macOS UX
+- **Touch Bar support**: Recording controls on Touch Bar (start, stop, waveform preview)
+- **Focus mode awareness**: Respect Do Not Disturb — suppress notifications during recording
+- **Dock badge**: Show unread notes count on Dock icon
+
+---
+
 ## Out of Scope
 - Video meeting recording (R12)
 - Team workspace / org-level features (R13)

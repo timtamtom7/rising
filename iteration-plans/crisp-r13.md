@@ -34,6 +34,28 @@ Expand Crisp beyond individual users into a team/productivity platform — enabl
 
 ---
 
+## CrispMac Companion — Round 13: System Deeper Integration, Automation & Enterprise
+
+### System-Level Automation
+- **Shortcuts integration**: Native Apple Shortcuts actions — "Start Crisp recording", "Get latest transcript", "Create note from clipboard"
+- **Automator actions**: Workflow actions for power users
+- **Scripting support**: AppleScript dictionary for scripting recording, playback, and library access
+- **Launch at login**: System login item registration via ServiceManagement framework
+
+### Enterprise & Advanced
+- **SSO support**: Google Workspace / Microsoft SSO for enterprise Mac deployments
+- **MDM configuration**: Mobile Device Management profile support for org-wide deployment
+- **Network audio capture**: Record from networked microphones or audio interfaces
+- **Audit logging**: Local audit log of all recordings and exports (for compliance)
+
+### Advanced macOS Features
+- **VRR display support**: Smooth 120Hz waveform animation on ProMotion displays
+- **Spatial audio playback**: Head-tracked spatial audio on Mac with AirPods Pro
+- **Metal-accelerated waveform**: GPU-rendered waveform using Metal for perf on large recordings
+- **External display recording**: Record from FaceTime camera + screen simultaneously
+
+---
+
 ## Out of Scope
 - Third-party integrations (Zoom, Google Meet, Teams) (R14)
 - Internationalization (R15)
