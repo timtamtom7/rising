@@ -1,40 +1,62 @@
-# blink — Round 12: Social, Shared Albums, Collaborative Memories
+# Blink — Iteration R12: Sharing & Shared Albums
 
 ## Goal
-Add social layers that let Blink users share and collaborate on memories — without making Blink a social network. The focus is intimate sharing (close friends, family) with strong privacy controls.
+Allow selective sharing of individual clips or curated albums with trusted people — intimate sharing, not social broadcasting.
 
 ---
 
-## Scope
+## Feature List
 
-### Shared Albums (Close Circle)
-- Create a "Close Circle" — up to 10 people you trust
-- Anyone in the circle can share a clip to the shared album
-- Shared album auto-generates its own "On This Day" and monthly reel
-- Each circle member can see clips from their own device and shared clips
-- Leave circle anytime; removing yourself deletes your clips from the shared album
+### R12.1 — Individual Clip Export
+- Share any single clip as a video file (MOV/MP4)
+- Export to Files app, AirDrop, Messages, email
+- Option to trim (choose start/end within the 30s clip)
+- "Copy link" for local network sharing
 
-### Collaborative Albums
-- Invite non-Blink users via link (they can view, but need Blink to contribute)
-- Any contributor can trim or favorite clips in the collaborative album
-- "Contributors" list with who shared what
-- Moderation: creator can remove any clip
+### R12.2 — Shared Albums
+- Create a named album from selected clips
+- Invite others via link or Apple ID email
+- Shared album lives in iCloud (or user's own cloud if they prefer)
+- Collaborators can add clips from their own Blink collection
+- Album is read-only for viewers unless they have edit permission
 
-### Social Sharing (Public-Anonymous)
-- Share a single clip as an anonymous "moment" to a public feed (opt-in)
-- Feed is curated: only blinks shared publicly appear; no usernames, no faces detected (blur faces automatically)
-- Like/react with emoji reactions
-- Most-loved moments of the week shown in-app
-- No follower system, no profiles — purely anonymous moment sharing
+### R12.3 — Shared Album Viewer
+- Simple web view or lightweight macOS viewer for people without the app
+- Stream clips without downloading full files
+- Download individual clips or full album as zip
 
-### Privacy Controls
-- Per-clip sharing settings: close circle only, specific people, or public
-- Face blur toggle before any sharing
-- "Never share automatically" setting (opt-out of any sharing)
-- Sharing history: who viewed your shared clip
+### R12.4 — Collaboration Notifications
+- Notify album owner when someone adds a clip
+- "X added a moment to Summer 2025 album"
+- Prevent spam: rate-limit adds
+
+### R12.5 — Privacy Controls
+- Per-clip sharing toggle (default: off)
+- Album owner can lock album (no new adds)
+- Remove someone from shared album
 
 ---
 
-## Out of Scope
-- Comments on public moments (keep it reaction-only)
-- Algorithm-based friend suggestions
+## Technical Approach
+- **iCloud sharing** via CloudKit (CKDContainer.share)
+- **Link-based sharing** via CloudKit sharing or custom signed URLs
+- **HLS streaming** for album viewing without download
+- **Keychain** for managing sharing credentials
+- **Compress** exported clips to HEVC for smaller file sizes
+
+---
+
+## UI Changes
+- Share button on PlaybackView (export icon)
+- Albums section in sidebar: "My Albums" + "Shared With Me"
+- Album detail view: clip grid, collaborator avatars, add clip button
+- Settings: sharing preferences, linked accounts
+
+---
+
+## Milestones
+- [ ] Clip export with trim (R12.1)
+- [ ] Shared album creation and CloudKit sharing (R12.2)
+- [ ] Album viewer for non-users (R12.3)
+- [ ] Collaboration notifications (R12.4)
+- [ ] Privacy controls (R12.5)

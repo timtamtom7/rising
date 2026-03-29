@@ -1,37 +1,39 @@
-# drift — Round 13: Social Features, Sleep Challenges, Community
+# Drift — R13 Iteration Plan
 
-## Goal
-Build social features that create accountability and community around sleep health — making sleep improvement a shared experience rather than a solitary one.
+## Focus
+**Family Sync & Multi-Device HealthKit Sharing**
 
----
+## Goals
+- Add Family Members model: invite up to 5 family members via share link
+- Display family sleep leaderboard: who slept best last night, weekly averages
+- Sync sleep data via iCloud HealthKit sharing (CloudKit + HealthKit)
+- Family member cards: avatar, last night score, trend arrow, streak count
 
-## Scope
+## Technical Details
+- `FamilyMember` model already exists — expand with `cloudKitRecordID`, `inviteStatus`
+- Use `HKAnchoredObjectQuery` on shared HealthKit containers for family data
+- iCloud container: `iCloud.com.tommaso.drift` for family sync
+- `FamilyView`: grid of `FamilyMemberCard` components
 
-### Sleep Challenges
-- **30-Day Sleep Challenge**: Join a 30-day challenge — sleep by 10:30 PM for 30 days, wake by 6:30 AM
-- **Challenge types**: Consistency (same bedtime 7 days/week), Duration (8+ hours), Efficiency (fall asleep in <15 min)
-- **Progress tracking**: See your streak vs. challenge goal, daily
-- **Challenge completion**: Celebrate with animated badge, share achievement
+## UI Updates
+- **Family Tab**: Horizontal scroll of family member cards + invite button
+- **FamilyMemberCard**: Avatar, name, last score, streak badge, trend indicator
+- **Leaderboard Sheet**: Ranked list of family by weekly average score
+- **Invite Flow**: Share sheet with deep link to install Drift
 
-### Sleep Circles (Close Friends)
-- **Sleep Circle**: Invite up to 5 close friends to share sleep stats (opt-in, privacy-controlled)
-- **Weekly sleep showdown**: Who got the best sleep score this week? (anonymous or named, user choice)
-- **Accountability partner**: Link with one person — get notified if they haven't logged sleep in 2 days
-- **Encouragement**: Send "sleep high-five" reactions to friends' good nights
+## Dependencies
+- CloudKit (via HealthKit sharing)
+- ShareKit / native share sheet
+- HealthKit family sharing entitlement
 
-### Anonymous Social
-- **Drift community**: Anonymous, public feed of sleep insights (no names, no profiles)
-- **Upvote sleep wins**: "Finally hit 8 hours!" — others can react
-- **Sleep advice threads**: "What helps you fall asleep?" — community answers
-- No follower system — purely anonymous, interest-based
+## Milestones
+- [ ] FamilyMember model expansion
+- [ ] Shared HealthKit container queries
+- [ ] FamilyView with member cards
+- [ ] Leaderboard sheet
+- [ ] Invite flow
 
-### Sleep Leaderboards (Teams)
-- **Team sleep challenges**: Coworkers can join a team challenge
-- **Team stats**: Team average sleep score, team sleep consistency
-- **Company wellness integration**: Export team sleep data for wellness program reporting (aggregated, anonymous)
-
----
-
-## Out of Scope
-- Smart home device integration (R14)
-- Long-term health tracking and reporting (R15)
+## Notes
+- Family sharing requires all members to have iOS 26+ and opt-in to HealthKit sharing
+- Privacy first: show aggregate scores only, raw data stays on device
+- Consider a "Sleep Challenge" gamification angle for family competition

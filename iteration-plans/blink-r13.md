@@ -1,38 +1,79 @@
-# blink — Round 13: Apple Ecosystem, watchOS, visionOS, tvOS
+# Blink — Iteration R13: Polish & App Store Launch
 
 ## Goal
-Expand Blink to every screen in the Apple ecosystem, making memories accessible anywhere — and turning Apple TV into a shared family memory screen.
+Ship Blink 1.0.0 to the Mac App Store. All features from R1–R12 complete, polished, and ready for real users.
 
 ---
 
-## Scope
+## Pre-Launch Checklist
 
-### watchOS App
-- Show recent clips (last 3 days) as a watch face complication
-- Tap to play a clip inline on watch (small screen optimized)
-- "Memory of the day" watch face with AI-selected clip
-- Remote control: use watch to start/stop recording from a distance
-- hapticTap to record (raise wrist, tap — instant 10s capture)
+### App Store Assets
+- [ ] App icon: camera lens / eye motif, rendered at all required sizes (16, 32, 64, 128, 256, 512, 1024)
+- [ ] Screenshots: 5 screenshots for Mac App Store (1280×720)
+  - Record view
+  - Calendar view
+  - Playback view
+  - Menu bar popover
+  - Settings
+- [ ] App Store description (3,000 char limit)
+- [ ] Keywords (100 char limit)
+- [ ] Privacy policy URL (required for camera apps)
+- [ ] Category: Productivity or Lifestyle
 
-### visionOS App
-- Immersive "Memory Room" in visionOS: step into a spatial environment showing your favorite clips on floating screens
-- Mixed reality overlay: see clips anchored to real-world locations (spatial capture)
-- "Memory Gallery" in visionOS: walk through a gallery of your yearly highlights in 3D space
-- FaceTime integration: during a call, share a memory as a spatial moment
+### Legal / Accounts
+- [ ] Apple Developer account ($99/year)
+- [ ] App Store Connect entry created
+- [ ] Bundle ID registered: `com.blink.macos`
+- [ ] TestFlight beta review submitted
+- [ ] App Store review submission
 
-### tvOS App (Apple TV)
-- "Blink Screensaver": beautiful slide show of your clips as Apple TV screensaver
-- "Family Room" mode: shared clips from all family members, auto-updating
-- Select specific clips or let AI choose the best ones for the screensaver
-- No account required — just sign in with Apple TV Apple ID to activate
+### Code Polish
+- [ ] All compiler warnings resolved
+- [ ] Hard-coded strings → localized (English first, prepare for localization)
+- [ ] Error states handled gracefully (camera denied, storage full, etc.)
+- [ ] macOS 15.0 minimum confirmed
+- [ ] Apple Silicon + Intel builds (Rosetta) tested
+- [ ] Launch at login (optional, via SMAppService)
 
-### iPad Multi-Cam
-- iPad can connect to multiple iPhones via local network for multi-angle recording coordination
-- Edit multi-cam footage in iPad app
-- Drag-and-drop clips from multiple devices into one timeline
+### UX Polish
+- [ ] First-launch tutorial: 3 screens explaining the concept
+- [ ] Empty states designed (no videos yet, camera denied, etc.)
+- [ ] Recording confirmation animation (satisfying "saved" moment)
+- [ ] Keyboard shortcuts: ⌘N for new recording (when window focused)
+- [ ] Touch Bar support (if MacBook Pro): record button, today's date
+
+### Performance
+- [ ] App launch time < 2 seconds cold start
+- [ ] Calendar grid smooth scrolling (virtualized list)
+- [ ] Thumbnail loading: cache to disk, lazy load visible cells
+- [ ] Memory usage < 150MB typical
+
+### Security
+- [ ] Camera access requested only after first record tap (not on launch)
+- [ ] All videos stored in user's own Movies/Blink directory
+- [ ] No analytics SDK (privacy-first)
+- [ ] App Sandbox enabled for App Store
 
 ---
 
-## Out of Scope
-- Full Android support (long-term, not this round)
-- Web platform (R14)
+## Launch Day
+- [ ] Submit to App Store
+- [ ] Prepare launch blog post / social mention
+- [ ] Submit to ProductHunt (optional)
+- [ ] Prepare follow-up bug fix pipeline (GitHub issues)
+
+---
+
+## Post-Launch
+- [ ] Monitor App Store reviews
+- [ ] Address critical bugs within 48h
+- [ ] Collect user feedback for R14
+
+---
+
+## Milestones
+- [ ] All App Store assets created
+- [ ] App Store submission submitted
+- [ ] All warnings resolved
+- [ ] Polish pass complete
+- [ ] BUILD SHIPPED 🚀

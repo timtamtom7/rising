@@ -1,37 +1,36 @@
-# drift — Round 12: Sleep Coaching, Personalized Programs, Habit Formation
+# Drift — R12 Iteration Plan
 
-## Goal
-Transform Drift from a sleep tracker into a sleep improvement coach — providing personalized, AI-driven sleep programs that help users actively improve their sleep over time.
+## Focus
+**AI Sleep Insights & Personalized Recommendations**
 
----
+## Goals
+- Build the AI Insight Service that analyzes sleep patterns and generates 3 personalized tips per week
+- Weekly Report generation: summarize 7 days of sleep, compare to prior week, highlight anomalies
+- Implement the `SleepInsight` model with categories: Consistency, Duration, Stage Quality, Lifestyle
+- Add "Sleep Score Breakdown" detail view showing contribution of each factor
 
-## Scope
+## Technical Details
+- `AIInsightService`: Use local ML models or API (OpenAI) to generate insights based on `WeeklyReport` data
+- `WeeklyReportService`: Aggregate `SleepRecord[]` into a structured report
+- Store reports in SQLite (already have SQLite.swift dependency)
+- `SleepInsight` model categories: `consistency`, `duration`, `stageQuality`, `lifestyle`, `趋势`
 
-### Sleep Coaching Programs
-- **AI-generated sleep program**: Based on 2 weeks of Drift data, AI creates a personalized 4-week sleep improvement plan
-- **Program types**: "Deep Sleep Boost", "Sleep Onset Insomnia", "Consistency Builder", "Early Riser", "Night Owl Reset"
-- **Daily micro-actions**: Each day, 1-3 actionable suggestions: "Go to bed 15 minutes earlier", "Avoid screens for 30 min before bed", "Try a 10-min wind-down routine"
-- **Weekly check-in**: AI reviews progress, adjusts the program for week 2
+## UI Updates
+- **Insights Tab**: Card-based layout, 3 insight cards per week with icon, title, body
+- **Weekly Report View**: Summary stats + bar chart comparison vs prior week
+- **Score Breakdown**: Expandable ring showing contribution weights
 
-### Smart Alarm 2.0
-- **Intelligent wake window**: Set a wake-up time (e.g., 7:00 AM) with a 20-minute window — Drift wakes you at the optimal point in light sleep within that window
-- **Wake-up routine**: When alarm fires, show morning briefing: sleep score, today's weather, tomorrow's sleep goal
-- **Sunrise alarm**: Watch screen gradually brightens before the alarm (simulate natural sunrise)
-- **Sleep ending detection**: Don't just use a fixed wake window — actually detect when sleep ends naturally, alarm then
+## Dependencies
+- SQLite.swift (already in project)
+- OpenAI API key or on-device ML
 
-### Wind-Down Routines
-- **Guided sleep routines**: 10-30 min audio routines (via Apple Music / podcast) — breathing, gentle stretching, story
-- **Sleep triggers tracking**: What helps you fall asleep? Track: white noise, reading, no screen, meditation, temperature
-- **Bedtime nudges**: Notification at optimal bedtime (based on when you need to wake + required sleep)
+## Milestones
+- [ ] WeeklyReportService
+- [ ] AIInsightService (MVP with rule-based insights)
+- [ ] Insights tab in iOS app
+- [ ] Weekly report card in macOS app
+- [ ] Score breakdown detail view
 
-### Caffeine & Alcohol Tracking
-- Log caffeine intake (coffee, tea, energy drinks)
-- Log alcohol intake
-- **Correlation insights**: "Nights with >2 drinks, your deep sleep is 23% lower"
-- Alert: "It's 2 PM — consider no more caffeine to protect tonight's sleep"
-
----
-
-## Out of Scope
-- Community / social sleep challenges (R13)
-- Integration with smart home devices (R14)
+## Notes
+- Keep AI insights private — no data leaves device unless user opts in
+- Consider using Apple's `TextRecognition` or `NaturalLanguage` framework for local analysis
