@@ -360,14 +360,14 @@ struct ReadingStatsDashboard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "flame.fill")
                             .font(.system(size: 14))
-                            .foregroundColor(.orange)
+                            .foregroundColor(Theme.accent)
                         Text("\(stats.currentStreak) day streak")
                             .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(.orange)
+                            .foregroundColor(Theme.accent)
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .background(Color.orange.opacity(0.1))
+                    .background(Theme.accent.opacity(0.1))
                     .cornerRadius(12)
                 }
             }
