@@ -8,6 +8,8 @@ struct ContentView: View {
         case readingList = "To Read"
         case currentlyReading = "Reading"
         case finished = "Finished"
+        case friends = "Friends"
+        case bookClubs = "Clubs"
         case addBook = "Add Book"
     }
 
@@ -27,6 +29,12 @@ struct ContentView: View {
                 FinishedBooksView()
                     .environmentObject(store)
                     .tag(AppTab.finished)
+
+                FriendActivityView()
+                    .tag(AppTab.friends)
+
+                BookClubView()
+                    .tag(AppTab.bookClubs)
 
                 AddBookView()
                     .environmentObject(store)
