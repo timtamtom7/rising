@@ -30,7 +30,15 @@ struct FinishedBooksView: View {
 
             ScrollView {
                 VStack(spacing: 20) {
-                    // Stats Card
+                    // AI Reading Stats Dashboard (new R11)
+                    let detailedStats = ReadingAIService.shared.calculateReadingStats(from: store.books)
+                    ReadingStatsDashboard(stats: detailedStats)
+
+                    // Genre Insights (new R11)
+                    let insights = ReadingAIService.shared.calculateGenreInsights(from: store.books)
+                    GenreInsightsView(insights: insights, library: store.books)
+
+                    // Stats Card (existing)
                     StatsCard()
                         .environmentObject(store)
 

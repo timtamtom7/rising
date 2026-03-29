@@ -3,9 +3,19 @@ import SwiftUI
 struct CurrentlyReadingView: View {
     @EnvironmentObject var store: LibraryStore
     @State private var selectedBook: Book?
+    @State private var recommendation: BookSuggestion?
+    @State private var showRecommendation = true
 
     var currentBooks: [Book] {
         store.books.filter { $0.status == .currentlyReading }
+    }
+
+    var recentlyRead: [Book] {
+        store.books
+            .filter { $0.status == .finished }
+            .sorted { ($0.dateFinished ?? Date.distantPast) > ($1.dateFinished ?? Date.distantPast) }
+            .prefix(5)
+            .map { $0 }
     }
 
     var body: some View {
@@ -43,6 +53,19 @@ struct CurrentlyReadingView: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 20) {
+                        // AI Recommendation Banner (R11)
+                        if showRecommendation, let suggestion = recommendation {
+                            RecommendationBanner(
+                                suggestion: suggestion,
+                                onAccept: {
+                                    acceptRecommendation(suggestion)
+                                },
+                                onDismiss: {
+                                    showRecommendation = false
+                                }
+                            )
+                        }
+
                         ForEach(currentBooks) { book in
                             CurrentlyReadingCard(book: book)
                                 .environmentObject(store)
@@ -52,6 +75,23 @@ struct CurrentlyReadingView: View {
                 }
             }
         }
+        .onAppear {
+            updateRecommendation()
+        }
+        .onChange(of: store.books) { _, _ in
+            updateRecommendation()
+        }
+    }
+
+    private func updateRecommendation() {
+        recommendation = ReadingAIService.shared.suggestNextBook(from: store.books, recentlyRead: recentlyRead)
+    }
+
+    private func acceptRecommendation(_ suggestion: BookSuggestion) {
+        var updated = suggestion.book
+        updated.status = .currentlyReading
+        store.updateBook(updated)
+        showRecommendation = false
     }
 }
 

@@ -17,6 +17,15 @@ enum Genre: String, CaseIterable, Codable {
     case other = "Other"
 }
 
+enum ReadingMood: String, CaseIterable, Codable {
+    case light = "Light & Easy"
+    case heavy = "Heavy & Deep"
+    case fast = "Fast-Paced"
+    case contemplative = "Contemplative"
+    case inspiring = "Inspiring"
+    case technical = "Technical"
+}
+
 enum Priority: Int, CaseIterable, Codable {
     case low = 3
     case medium = 2
@@ -45,6 +54,7 @@ struct Book: Identifiable, Codable, Equatable {
     var dateFinished: Date?
     var coverColor: String
     var notes: String
+    var moods: [ReadingMood]
 
     init(
         id: UUID = UUID(),
@@ -59,7 +69,8 @@ struct Book: Identifiable, Codable, Equatable {
         dateAdded: Date = Date(),
         dateFinished: Date? = nil,
         coverColor: String = "8B4513",
-        notes: String = ""
+        notes: String = "",
+        moods: [ReadingMood] = []
     ) {
         self.id = id
         self.title = title
@@ -74,6 +85,7 @@ struct Book: Identifiable, Codable, Equatable {
         self.dateFinished = dateFinished
         self.coverColor = coverColor
         self.notes = notes
+        self.moods = moods
     }
 
     var progress: Double {
@@ -124,7 +136,8 @@ class LibraryStore: ObservableObject {
                 genre: .science,
                 status: .currentlyReading,
                 priority: .high,
-                coverColor: "228B22"
+                coverColor: "228B22",
+                moods: [.technical, .contemplative]
             ),
             Book(
                 title: "Clean Code",
@@ -134,7 +147,8 @@ class LibraryStore: ObservableObject {
                 genre: .science,
                 status: .toRead,
                 priority: .high,
-                coverColor: "722F37"
+                coverColor: "722F37",
+                moods: [.technical]
             ),
             Book(
                 title: "Atomic Habits",
@@ -145,7 +159,8 @@ class LibraryStore: ObservableObject {
                 status: .finished,
                 priority: .medium,
                 dateFinished: Date().addingTimeInterval(-86400 * 30),
-                coverColor: "c87b4f"
+                coverColor: "c87b4f",
+                moods: [.inspiring, .light]
             ),
             Book(
                 title: "Sapiens",
@@ -156,7 +171,8 @@ class LibraryStore: ObservableObject {
                 status: .finished,
                 priority: .medium,
                 dateFinished: Date().addingTimeInterval(-86400 * 90),
-                coverColor: "8B4513"
+                coverColor: "8B4513",
+                moods: [.contemplative, .heavy]
             ),
             Book(
                 title: "Thinking, Fast and Slow",
@@ -166,7 +182,8 @@ class LibraryStore: ObservableObject {
                 genre: .philosophy,
                 status: .toRead,
                 priority: .low,
-                coverColor: "4a5568"
+                coverColor: "4a5568",
+                moods: [.heavy, .contemplative]
             ),
             Book(
                 title: "The Design of Everyday Things",
@@ -176,7 +193,8 @@ class LibraryStore: ObservableObject {
                 genre: .nonFiction,
                 status: .currentlyReading,
                 priority: .medium,
-                coverColor: "2563eb"
+                coverColor: "2563eb",
+                moods: [.technical, .inspiring]
             )
         ]
         updateStats()
